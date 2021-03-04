@@ -2,10 +2,10 @@
   "name": "nodejs-simple-api",
   "version": "1.0.0",
   "description": "nodejs simple restful api",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/enesekinci/nodejs-simple-api#readme",
   "dependencies": {
+    "fastify": "^3.13.0",
+    "mongoose": "^5.11.18",
     "nodemon": "^2.0.7"
   }
 }
