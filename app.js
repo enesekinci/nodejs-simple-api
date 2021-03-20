@@ -13,7 +13,7 @@ fastify.listen(config.APP_PORT, config.APP_URL, function (err, address) {
 
 // Declare a route
 fastify.get('/', function (request, response) {
-    response.send({ hello: 'world' })
+    response.send({ hello: 'world', request: request.headers })
 })
 
-fastify.register(require('./routes/test/test'), { prefix: '/v1/test' })
+fastify.register(require('./routes/test'), { prefix: '/v1/test' })
