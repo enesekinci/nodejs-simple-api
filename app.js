@@ -16,4 +16,5 @@ fastify.get('/', function (request, response) {
     response.send({ hello: 'world', request: request.headers })
 })
 
-fastify.register(require('./routes/test'), { prefix: '/v1/test' })
+fastify.register(require('./routes/test'), { prefix: '/test' })
+fastify.register(require('./routes/user'), { prefix: '/user' })
