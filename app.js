@@ -29,9 +29,10 @@ fastify.addContentTypeParser('application/json', { parseAs: 'string' }, function
 
 fastify.register(require('./middleware/auth'))
 
-fastify.get('/', (request, response) => response.send({
-    token: fastify.jwt.sign({ email: "email" })
-}))
+fastify.get('/', async function (request, response) {
+    const token = await response.jwtSign({ data: "index" })
+    response.send({ token })
+})
 
 fastify.register(require('./routes/test'), { prefix: '/test' })
 fastify.register(require('./routes/user'), { prefix: '/user' })

@@ -7,3 +7,11 @@ Content-Type: application/json
 {
     "email" : "enes.eknc.96@gmail.com"
 }
+
+###
+POST {{BASE_URL}}/user/register
+Content-Type: application/json
+
+{
+    "email": "enes.eknc."
+}
