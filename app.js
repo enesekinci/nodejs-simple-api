@@ -1,7 +1,11 @@
 const config = require('dotenv').config().parsed
-// Require the framework and instantiate it
-const fastify = require('fastify')({ logger: config.APP_DEBUG })
+const path = require('path')
+const errorHandling = require('./middleware/error-handling')
+const log_path = path.join(__dirname, '/storage/logs/api.log')
 require('./database/mongodb')
+const fastify = require('fastify')({ logger: { level: 'info', file: log_path } })
+fastify.register(require('fastify-jwt'), { secret: config.APP_KEY })
+
 // Run the server!
 fastify.listen(config.APP_PORT, config.APP_URL, function (err, address) {
     if (err) {
@@ -9,12 +13,27 @@ fastify.listen(config.APP_PORT, config.APP_URL, function (err, address) {
         process.exit(1)
     }
     fastify.log.info(`server listening on ${address}`)
+
 })
 
-// Declare a route
-fastify.get('/', function (request, response) {
-    response.send({ hello: 'world', request: request.headers })
+fastify.addContentTypeParser('application/json', { parseAs: 'string' }, function (req, body, done) {
+    try {
+        var json = JSON.parse(body)
+        done(null, json)
+    } catch (err) {
+        err.statusCode = 400
+        done(err, undefined)
+    }
 })
+
+
+fastify.register(require('./middleware/auth'))
+
+fastify.get('/', (request, response) => response.send({
+    token: fastify.jwt.sign({ email: "email" })
+}))
 
 fastify.register(require('./routes/test'), { prefix: '/test' })
 fastify.register(require('./routes/user'), { prefix: '/user' })
+
+fastify.setErrorHandler(errorHandling)
