@@ -13,7 +13,7 @@ module.exports = async function routes(fastify, options, next) {
         response.send({ bye: 'good bye' })
     })
 
-    fastify.post('/generate-membership-token', UserController.generateMemberShipTokken);
+    fastify.post('/generate-membership-token', UserController.generateMemberShipToken);
 
     fastify.get('/check-membership-token', { preValidation: [fastify.jwt_verify] }, async (request, reply) => {
         return null

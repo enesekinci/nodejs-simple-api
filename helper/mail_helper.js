@@ -1,19 +1,20 @@
 const nodemailer = require('nodemailer');
-const { MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASSWORD } = require('../App/Settings');
+const config = require('dotenv').config().parsed
 const ejs = require('ejs');
 
 const smtpTransport = nodemailer.createTransport({
-    host: MAIL_HOST,
-    port: MAIL_PORT,
+    service:'gmail',
+    host: config.MAIL_HOST,
+    port: config.MAIL_PORT,
     auth: {
-        user: MAIL_USER,
-        pass: MAIL_PASSWORD
+        user: config.MAIL_USERNAME,
+        pass: config.MAIL_PASSWORD
     }
 });
 
 const templates = {
-    generateMembershipToken: "./Email/templates/user/GenerateMembershipToken.ejs",
-    resetPassword: "./Email/templates/user/ResetPassword.ejs",
+    generateMembershipToken: "./email/templates/user/generate_membership.ejs",
+    resetPassword: "./email/templates/user/reset_password.ejs",
 };
 
 const getHtmlTemplate = (templateName) => {

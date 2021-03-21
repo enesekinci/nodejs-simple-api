@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/enesekinci/nodejs-simple-api#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "fastify": "^3.13.0",

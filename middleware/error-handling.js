@@ -1,11 +1,14 @@
 
 module.exports = async (error, request, response) => {
-    // console.log('SUBMODULE ERROR HANDLER')
-    // console.log(error.statusCode);
-    // console.log(error.code);
-    // console.log(error.message);
-    // console.log(request.body);
-    // response.status(500)
+    const code = error.statusCode
+    const message = error.message
+    const responseData = {
+        status: false,
+        statusCode: code,
+        message: message,
+    }
+
+    console.log(error);
 
     if (error.validation) {
         let message = error.message
@@ -17,5 +20,7 @@ module.exports = async (error, request, response) => {
             message: param + ' is required'
         })
     }
+
+    response.status(code).send(responseData)
 }
 
