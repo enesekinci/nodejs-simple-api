@@ -1,0 +1,9 @@
+ @BASE_URL = http://localhost:3000
+
+ ###
+POST {{BASE_URL}}/user/generate-membership-token
+Content-Type: application/json
+
+{
+    "email" : "enes.eknc.96@gmail.com"
+}
