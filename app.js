@@ -2,7 +2,7 @@ const config = require('dotenv').config().parsed
 const path = require('path')
 const errorHandling = require('./app/middleware/error-handling')
 const moment = require('moment')
-const log_path = path.join(__dirname, './app/storage/logs/' + moment().format('Y-m-d') + '.log')
+const log_path = path.join(__dirname, './app/storage/logs/' + moment().format('YYYY-MM-DD') + '.log')
 require('./app/database/mongodb')
 const fastify = require('fastify')({ logger: { level: 'info', file: log_path } })
 fastify.register(require('fastify-jwt'), { secret: config.APP_KEY })
