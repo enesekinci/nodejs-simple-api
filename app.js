@@ -1,8 +1,9 @@
 const config = require('dotenv').config().parsed
 const path = require('path')
-const errorHandling = require('./middleware/error-handling')
-const log_path = path.join(__dirname, '/storage/logs/api.log')
-require('./database/mongodb')
+const errorHandling = require('./app/middleware/error-handling')
+const moment = require('moment')
+const log_path = path.join(__dirname, './app/storage/logs/' + moment().format('Y-m-d') + '.log')
+require('./app/database/mongodb')
 const fastify = require('fastify')({ logger: { level: 'info', file: log_path } })
 fastify.register(require('fastify-jwt'), { secret: config.APP_KEY })
 
@@ -27,14 +28,14 @@ fastify.addContentTypeParser('application/json', { parseAs: 'string' }, function
 })
 
 
-fastify.register(require('./middleware/auth'))
+fastify.register(require('./app/middleware/auth'))
 
 fastify.get('/', async function (request, response) {
     const token = await response.jwtSign({ data: "index" })
     response.send({ token })
 })
 
-fastify.register(require('./routes/test'), { prefix: '/test' })
-fastify.register(require('./routes/user'), { prefix: '/user' })
+fastify.register(require('./app/routes/test'), { prefix: '/test' })
+fastify.register(require('./app/routes/user'), { prefix: '/user' })
 
 fastify.setErrorHandler(errorHandling)
