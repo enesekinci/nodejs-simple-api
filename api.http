@@ -9,6 +9,14 @@ Content-Type: application/json
 }
 
 ###
+POST {{BASE_URL}}/user/check-membership-token
+Content-Type: application/json
+
+{
+    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVuZXMuZWtuYy45NkBnbWFpbC5jb20iLCJpYXQiOjE2MTYzNjA0NjZ9.qM1ht81-W3kZ5aGT-cQCaWnUCXnkfti4NsqS1E13MHM"
+}
+
+###
 POST {{BASE_URL}}/user/register
 Content-Type: application/json
 
