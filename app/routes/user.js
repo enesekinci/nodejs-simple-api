@@ -15,9 +15,7 @@ module.exports = async function routes(fastify, options, next) {
 
     fastify.post('/generate-membership-token', UserController.generateMemberShipToken);
 
-    fastify.get('/check-membership-token', { preValidation: [fastify.jwt_verify] }, async (request, reply) => {
-        return null
-    });
+    fastify.post('/check-membership-token', UserController.checkMembershipToken);
 
     next()
 }
