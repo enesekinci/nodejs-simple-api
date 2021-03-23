@@ -10,10 +10,10 @@ fastify.register(require('fastify-jwt'), { secret: config.APP_KEY })
 // Run the server!
 fastify.listen(config.APP_PORT, config.APP_URL, function (err, address) {
     if (err) {
-        fastify.log.error(err)
+        // fastify.log.error(err)
         process.exit(1)
     }
-    fastify.log.info(`server listening on ${address}`)
+    // fastify.log.info(`server listening on ${address}`)
 
 })
 

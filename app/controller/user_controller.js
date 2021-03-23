@@ -3,16 +3,16 @@ const createHttpError = require('http-errors');
 const Validation = require('../helper/validation_helper');
 const MembershipToken = require('../model/membership_token');
 const { sendMail, getHtmlTemplate } = require('../helper/mail_helper')
-const User = require('../model/user')
+const User = require('../model/user');
+const { JWTHelper } = require('../helper/jwt_helper');
 
 class UserController {
 
     static generateMemberShipToken = async function (request, response) {
 
-        const email = request.body.email
+        const isEmail = Validation.emailVerify(request.body.email)
 
-        if (!Validation.emailVerify(email))
-            throw createHttpError(400, "E-posta adresi geçerli değil.")
+        if (!isEmail) throw createHttpError(400, "E-posta adresi geçerli değil.")
 
         const user = await User.findOne({ email: request.body.email })
 
@@ -42,6 +42,40 @@ class UserController {
         }
 
     }
+
+    static checkMembershipToken = async function (request, response) {
+        const token = request.body.token;
+        const verify = await JwtHelper.JWTDecode(token)
+        request.log.debug("verify => " + verify)
+
+        request.log.debug(token)
+        return response.send()
+        if (token) {
+
+            const user = await MembershipApplication.findOne({ token: request.body.token });
+
+            if (user) {
+
+                // dogru oldugu için kullanıcı artık oluşturulmuş olmalı -- olamaz required alanlar var.
+
+                return response.status(200).json({
+                    statusCode: 200,
+                    data: { email: user.email },
+                });
+
+            } else {
+                throw createHttpError(400, "E-posta adresi kayıt listesinde mevcut değil.");
+            }
+        } else {
+
+            await User.findOneAndDelete({
+                token: request.body.token,
+            });
+
+            throw createHttpError(403, "Token Süresi Dolmuş!");
+        }
+
+    };
 }
 
 
