@@ -3,8 +3,6 @@ const JWT = require('jsonwebtoken');
 const config = require('dotenv').config().parsed
 
 
-
-
 class JwtHelper {
 
     static async JWTToken(data = {}, expiresIn = config.MEMBERSHIPAPPLICATIONPERIOD) {

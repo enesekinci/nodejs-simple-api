@@ -3,7 +3,11 @@ const Joi = require('joi')
 const config = require('dotenv').config().parsed
 const registerSchema = require('./schema/user_register')
 
-module.exports = async function routes(fastify, options, next) {
+module.exports = async function routes(fastify) {
+
+    fastify.post('/generate-membership-token', { preValidation: [fastify.JwtAuth] }, UserController.generateMemberShipToken);
+
+    fastify.post('/check-membership-token', UserController.checkMembershipToken);
 
     fastify.post('/register', { schema: registerSchema }, async (request, response, next) => {
         response.send({ hello: 'world test', request: request.body })
@@ -12,10 +16,4 @@ module.exports = async function routes(fastify, options, next) {
     fastify.post('/login', async (request, response, next) => {
         response.send({ bye: 'good bye' })
     })
-
-    fastify.post('/generate-membership-token', UserController.generateMemberShipToken);
-
-    fastify.post('/check-membership-token', UserController.checkMembershipToken);
-
-    next()
 }

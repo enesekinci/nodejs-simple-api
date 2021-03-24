@@ -1,6 +1,13 @@
  @BASE_URL = http://localhost:3000
 
- ###
+
+###
+GET {{BASE_URL}}/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJUeXBlIjoiMCIsIl9pZCI6IjVmODdmY2ZhNmMwZTU3NTgzY2UwMjhhMSIsIm5hbWUiOiJtZWN6dXBLYXltYWthbSIsInVzZXJOYW1lIjoiZGVsaWtheW1ha2FtIiwiZW1haWwiOiJkZWxpLmtheW1ha2FtQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDUwdjh3QlVIL0w3UGp6cXc0TThicWVSQVlPREpBUzFmUC9XSXBQbTVCY0c4dDhnZjc2YVBtIiwiY3JlYXRlZEF0IjoiMjAyMC0xMC0xNVQwNzo0MDo0Mi4zNDFaIiwidXBkYXRlZEF0IjoiMjAyMC0xMC0xNVQwNzo0MDo0Mi4zNDFaIiwiX192IjowfSwiaWF0IjoxNjAyNzU1ODY4LCJleHAiOjE2MDI3NjMwNjh9.HcdK06v42ed3Kwdzy84nJc_yuMIWMYrg3q3RUR91OCA
+
+
+###
 POST {{BASE_URL}}/user/generate-membership-token
 Content-Type: application/json
 

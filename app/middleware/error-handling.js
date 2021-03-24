@@ -8,8 +8,6 @@ module.exports = async (error, request, response) => {
         message: message,
     }
 
-    console.log(error);
-
     if (error.validation) {
         let message = error.message
         let param = message.split('\'')
@@ -20,6 +18,8 @@ module.exports = async (error, request, response) => {
             message: param + ' is required'
         })
     }
+    const fastify = require("fastify")()
+    request.log.error("hata oluştu")
 
     response.status(code).send(responseData)
 }
