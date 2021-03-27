@@ -24,21 +24,19 @@ class UserController {
         const result = await member_token.save()
 
         if (result) {
-            sendMail(
-                config.MAIL_FROM_ADDRESS,
-                email,
+            sendMail(config.MAIL_FROM_ADDRESS, email,
                 'Kullanıcı Kayıt Aktivasyon İşlemi',
                 getHtmlTemplate('generateMembershipToken'),
-                { name: '', token: token, mail_from: config.MAIL_FROM_ADDRESS }
+                { name: '', token: token, mail_from: config.MAIL_FROM_ADDRESS },
             )
             return response.status(200).send({
                 status: true,
                 statusCode: 200,
                 data: { token: token }
             })
-        } else {
-            throw createHttpError(500, "İşlem yapılamıyor.")
         }
+
+        throw createHttpError(500, "İşlem yapılamıyor.")
     }
 
     static checkMembershipToken = async function (request, response) {
@@ -84,6 +82,14 @@ class UserController {
         })
 
     }
+
+    static getMe = async function (request, response) {
+        return response.status(200).send({
+            status: true,
+            statusCode: 200,
+            data: { user: request.user },
+        });
+    };
 
 }
 
