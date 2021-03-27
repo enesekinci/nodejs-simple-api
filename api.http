@@ -24,9 +24,13 @@ Content-Type: application/json
 }
 
 ###
-POST {{BASE_URL}}/user/register
+POST {{BASE_URL}}/register
 Content-Type: application/json
 
 {
-    "email": "enes.eknc."
+    "asdsad":"sadasd",
+    "name":"enes ekinci",
+    "username":"enesekinci",
+    "email": "enes.eknc.96@gmail.com",
+    "password":"password"
 }

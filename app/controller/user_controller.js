@@ -5,6 +5,7 @@ const MembershipToken = require('../model/membership_token')
 const { sendMail, getHtmlTemplate } = require('../helper/mail_helper')
 const User = require('../model/user')
 const { JwtHelper } = require('../helper/jwt_helper')
+const { UserHelper } = require('../helper/user_helper')
 
 class UserController {
 
@@ -47,7 +48,7 @@ class UserController {
         if (isVerify) {
             const memberShip = await MembershipApplication.findOne({ token: request.body.token })
             if (memberShip)
-                return response.status(200).json({
+                return response.status(200).send({
                     statusCode: 200,
                     data: { email: user.email, token },
                 })
@@ -58,6 +59,32 @@ class UserController {
         }
 
     }
+
+    static register = async function (request, response) {
+
+        const { error, value } = User.validation({
+            name: request.body.name,
+            username: request.body.username,
+            email: request.body.email,
+            password: request.body.password
+        })
+
+        if (error)
+            throw createHttpError(400, error.details[0].message)
+
+        value.password = await UserHelper.passwordHash(value.password)
+
+        const user = new User(value)
+        await user.save()
+
+        return response.status(200).send({
+            status: true,
+            statusCode: 200,
+            data: { user },
+        })
+
+    }
+
 }
 
 
