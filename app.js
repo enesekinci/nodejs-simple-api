@@ -14,7 +14,8 @@ const log_path = path.join(__dirname, './app/storage/logs/' + moment().format('Y
 const fastify = require('fastify')({ logger: { level: 'error', file: log_path } })
 // jwt auth token check
 fastify.register(require('./app/middleware/jwt_auth'))
-
+// device data
+fastify.addHook('onRequest', require('./app/extension/device'))
 // Run the server!
 fastify.listen(config.APP_PORT, config.APP_URL, function (err, address) {
     if (err) {
