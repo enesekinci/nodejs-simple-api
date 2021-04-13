@@ -1,7 +1,7 @@
 
 module.exports = async (error, request, response) => {
     console.log(error)
-    const code = error.statusCode
+    const code = error.statusCode || 500
     const message = error.message
     const responseData = {
         status: false,
