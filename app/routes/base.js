@@ -1,5 +1,5 @@
 const { UserController } = require("../controller/user_controller");
-const registerSchema = require('../schema/user_register')
+const { LoginController } = require("../controller/login_controller");
 
 module.exports = async function routes(fastify) {
 
@@ -8,7 +8,7 @@ module.exports = async function routes(fastify) {
         response.send({ token })
     })
 
-    fastify.post('/register', { schema: registerSchema }, UserController.register)
+    fastify.post('/register', UserController.register)
 
-    // fastify.post('/login', { schema: registerSchema }, UserController.login)
+    fastify.post('/login', LoginController.baseLogin)
 }
