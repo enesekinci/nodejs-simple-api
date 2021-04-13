@@ -20,7 +20,7 @@ POST {{BASE_URL}}/user/check-membership-token
 Content-Type: application/json
 
 {
-    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVuZXMuZWtuYy45NkBnbWFpbC5jb20iLCJpYXQiOjE2MTYzNjA0NjZ9.qM1ht81-W3kZ5aGT-cQCaWnUCXnkfti4NsqS1E13MHM"
+    "token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiZW5lcy5la25jLjk2QGdtYWlsLmNvbSJ9LCJpYXQiOjE2MTcwMTkzOTEsImV4cCI6MTYxNzI3ODU5MX0.xSxUeZbNKJW2Hyjs69IxyfGaue2JFc9wCkUtAR_xmMg"
 }
 
 ###
@@ -28,7 +28,29 @@ POST {{BASE_URL}}/register
 Content-Type: application/json
 
 {
-    "asdsad":"sadasd",
+    "name":"enes ekinci",
+    "username":"enesekinci",
+    "email": "enes.eknc.96@gmail.com",
+    "password":"password"
+}
+
+###
+POST {{BASE_URL}}/login
+Content-Type: application/json
+
+{
+    "username":"enesekinci",
+    "email": "enes.eknc.96@gmail.com",
+    "password":"password"
+}
+
+###
+POST {{BASE_URL}}/user/update-me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im5hbWUiOiJlbmVzIGVraW5jaSIsImVtYWlsIjoiZW5lcy5la25jLjk2QGdtYWlsLmNvbSJ9LCJpYXQiOjE2MTcwNDk2NjMsImV4cCI6MTYxNzEzNjA2M30.ab7JXq1VnfqEeDb93OSTruzXo4OOTF-tmcqPoaGpeLU
+
+
+{
     "name":"enes ekinci",
     "username":"enesekinci",
     "email": "enes.eknc.96@gmail.com",
